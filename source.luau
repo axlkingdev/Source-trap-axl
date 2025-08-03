@@ -53,9 +53,9 @@ local redzlib = {
 		Version = "1.1.0"
 	},
 	Save = {
-		UISize = {50, 50},
-		TabSize = 60,
-		Theme = "Darker"
+		UISize = {890, 840},
+		TabSize = 680,
+		Theme = "Purple"
 	},
 	Settings = {},
 	Connection = {},
