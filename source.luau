@@ -54,7 +54,7 @@ local redzlib = {
 	},
 	Save = {
 		UISize = {50, 50},
-		TabSize = 160,
+		TabSize = 60,
 		Theme = "Darker"
 	},
 	Settings = {},
@@ -2682,12 +2682,12 @@ function redzlib:MakeWindow(Configs)
 				
 				ClickDelay = true
 				SetProps(JoinButton, {
-					Text = "Copied to Clipboard",
+					Text = "تم نسخ",
 					BackgroundColor3 = Color3.fromRGB(100, 100, 100),
 					TextColor3 = Color3.fromRGB(150, 150, 150)
 				})task.wait(5)
 				SetProps(JoinButton, {
-					Text = "Join",
+					Text = "دخول",
 					BackgroundColor3 = Color3.fromRGB(50, 150, 50),
 					TextColor3 = Color3.fromRGB(220, 220, 220)
 				})ClickDelay = false
