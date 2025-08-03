@@ -3,10 +3,12 @@ local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
+
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
+
+local CoreGui = (gethui and gethui()) or game:GetService("CoreGui");
 
 local redzlib = {
 	Themes = {
@@ -51,8 +53,8 @@ local redzlib = {
 		Version = "1.1.0"
 	},
 	Save = {
-		UISize = {380, 380},
-		TabSize = 190,
+		UISize = {50, 50},
+		TabSize = 160,
 		Theme = "Darker"
 	},
 	Settings = {},
@@ -1093,7 +1095,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "redz Library V5",
+	Name = "redz-library-v5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1839,6 +1841,8 @@ function redzlib:MakeWindow(Configs)
 		
 		if not FirstTab then Container.Parent = Containers end
 		
+		local Tab = { Enabled = (FirstTab == false) }
+		
 		local function Tabs()
 			if Container.Parent then return end
 			for _,Frame in pairs(ContainerList) do
@@ -1853,6 +1857,7 @@ function redzlib:MakeWindow(Configs)
 					Tab.func:Disable()
 				end
 			end)
+			Tab.Enabled = true
 			CreateTween({Container, "Size", UDim2.new(1, 0, 1, 0), 0.3})
 			CreateTween({LabelTitle, "TextTransparency", 0, 0.35})
 			CreateTween({LabelIcon, "ImageTransparency", 0, 0.35})
@@ -1862,11 +1867,11 @@ function redzlib:MakeWindow(Configs)
 		TabSelect.Activated:Connect(Tabs)
 		
 		FirstTab = true
-		local Tab = {}
 		table.insert(redzlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
 		Tab.Cont = Container
 		
 		function Tab:Disable()
+		  self.Enabled = false
 			Container.Parent = nil
 			CreateTween({LabelTitle, "TextTransparency", 0.3, 0.35})
 			CreateTween({LabelIcon, "ImageTransparency", 0.3, 0.35})
@@ -2205,7 +2210,7 @@ function redzlib:MakeWindow(Configs)
 				end
 				
 				local function CallbackSelected()
-					SetFlag(Flag, MultiSelect and Selected or tostring(Selected))
+					SetFlag(Flag, if MultiSelect then Selected else tostring(Selected or "..."))
 					Funcs:FireCallback(Callback, Selected)
 				end
 				
