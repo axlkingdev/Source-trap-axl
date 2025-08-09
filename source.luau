@@ -1128,7 +1128,7 @@ function MakeWindow(Configs)
       Size = UDim2.new(1, -100, 1, tonumber(-TextButton.Size.Y.Offset - 20)),
       Position = UDim2.new(0, 10, 0, tonumber(TextButton.Size.Y.Offset + 12.5)),
       Visible = false,
-      Image = "rbxassetid://4155801252"
+      Image = "rbxassetid://98008375644294"
     })Corner(UI_Grade)Stroke(UI_Grade)local SavePos = Create("Frame", UI_Grade, {Visible = false})
     
     local grade = Create("TextButton", TextButton, {
@@ -1274,7 +1274,7 @@ function MakeWindow(Configs)
     })
     
     local Arrow = Create("ImageLabel", TextButton, {
-      Image = "rbxassetid://6031090990",
+      Image = "rbxassetid://114154205126818",
       Size = UDim2.new(0, 25, 0, 25),
       Position = UDim2.new(0, 5, 0, 0),
       BackgroundTransparency = 1
@@ -1603,7 +1603,7 @@ function MakeWindow(Configs)
       Size = UDim2.new(1, -24, 0, 25),
       AnchorPoint = Vector2.new(0.5, 1),
       Position = UDim2.new(0.5, 0, 1, -8),
-      Text = "Join",
+      Text = "دخول",
       Font = Enum.Font.GothamBold,
       TextSize = 15,
       TextColor3 = Color3.fromRGB(220, 220, 220),
