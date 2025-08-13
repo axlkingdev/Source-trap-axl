@@ -1,11 +1,11 @@
-local Configs_HUB = {
-  Cor_Hub = Color3.fromRGB(15, 15, 15),
-  Cor_Options = Color3.fromRGB(15, 16, 16),
-  Cor_Stroke = Color3.fromRGB(64, 0, 192),
-  Cor_Text = Color3.fromRGB(240, 240, 240),
-  Cor_DarkText = Color3.fromRGB(140, 140, 140),
-  Corner_Radius = UDim.new(0, 4),
-  Text_Font = Enum.Font.FredokaOne
+local Configs_HUB = { 
+  Cor_Hub = Color3.fromRGB(0, 0, 0), 
+  Cor_Options = Color3.fromRGB(0, 0, 0), 
+  Cor_Stroke = Color3.fromRGB(128, 0, 255),  -- لون بنفسجي
+  Cor_Text = Color3.fromRGB(240, 240, 240), 
+  Cor_DarkText = Color3.fromRGB(240, 240, 240), 
+  Corner_Radius = UDim.new(0, 4), 
+  Text_Font = Enum.Font.FredokaOne 
 }
 
 local CoreGui = game:GetService("CoreGui")
@@ -413,7 +413,7 @@ function MakeWindow(Configs)
     
     local Mensage = Create("TextLabel", CloseMenu, {
       Size = UDim2.new(0.8, 0, 0.25, 0),
-      Text = "هل انت متاكد بغلاق سكربت",
+      Text = "are you sure you want to close this script??",
       Position = UDim2.new(0.1, 0, 0.2),
       TextColor3 = Configs_HUB.Cor_Text,
       Font = Configs_HUB.Text_Font,
@@ -425,7 +425,7 @@ function MakeWindow(Configs)
       Size = UDim2.new(0.35, 0, 0.3, 0),
       Position = UDim2.new(0.1, 0, 0.5, 0),
       BackgroundColor3 = Configs_HUB.Cor_Hub,
-      Text = "اغلاق سكربت",
+      Text = "Close Script",
       Font = Configs_HUB.Text_Font,
       TextColor3 = Color3.fromRGB(240, 0, 0),
       TextSize = 20
@@ -436,7 +436,7 @@ function MakeWindow(Configs)
       Position = UDim2.new(0.9, 0, 0.5, 0),
       AnchorPoint = Vector2.new(1, 0),
       BackgroundColor3 = Configs_HUB.Cor_Hub,
-      Text = "لا لااريد",
+      Text = "Cancel",
       Font = Configs_HUB.Text_Font,
       TextColor3 = Color3.fromRGB(0, 240, 0),
       TextSize = 20
@@ -609,72 +609,104 @@ function MakeWindow(Configs)
   function MakeTab(Configs)
     local TabName = Configs.Name or "Tab"
     local TabTitle = Configs.TabTitle or false
+    local TabImage = Configs.Image or nil
     
     local Frame = Create("Frame", ScrollBar, {
-      Size = UDim2.new(1, 0, 0, 25),
-      BackgroundTransparency = 1
-    })Corner(Frame)Stroke(Frame)
+        Size = UDim2.new(1, 0, 0, 25),
+        BackgroundTransparency = 1
+    }) Corner(Frame) Stroke(Frame)
     
     local TextButton = Create("TextButton", Frame, {
-      Size = UDim2.new(1, 0, 1, 0),
-      BackgroundTransparency = 1,
-      Text = ""
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        Text = ""
     })
-    
+
+    if TabImage then
+        Create("ImageLabel", Frame, {
+            Size = UDim2.new(0, 20, 0, 20),
+            Position = UDim2.new(0, 5, 0.5, -10),
+            BackgroundTransparency = 1,
+            Image = TabImage,
+            Name = "TabIcon"
+        })
+    end
+
+    local textOffset = TabImage and 30 or 5
+
     local TextLabel = Create("TextLabel", Frame, {
-      Size = UDim2.new(1, 0, 1, 0),
-      BackgroundTransparency = 1,
-      Font = Configs_HUB.Text_Font,
-      TextColor3 = textcolor,
-      TextSize = textsize,
-      Text = TabName
+        Size = UDim2.new(1, -textOffset, 1, 0),
+        Position = UDim2.new(0, textOffset, 0, 0),
+        BackgroundTransparency = 1,
+        Font = Configs_HUB.Text_Font,
+        TextColor3 = textcolor,
+        TextSize = textsize,
+        Text = TabName,
+        TextXAlignment = Enum.TextXAlignment.Left
     })
     
     local Container = Create("ScrollingFrame", Containers, {
-      Size = UDim2.new(1, 0, 1, 0),
-      ScrollingDirection = "Y",
-      AutomaticCanvasSize = "Y",
-      CanvasSize = UDim2.new(),
-      BackgroundTransparency = 1,
-      ScrollBarThickness = 2,
-      Visible = firstVisible
-    })Create("UIPadding", Container, {
-      PaddingLeft = UDim.new(0, 10),
-      PaddingRight = UDim.new(0, 10),
-      PaddingTop = UDim.new(0, 10),
-      PaddingBottom = UDim.new(0, 10)
-    })Create("UIListLayout", Container, {
-      Padding = UDim.new(0, 5)
+        Size = UDim2.new(1, 0, 1, 0),
+        ScrollingDirection = "Y",
+        AutomaticCanvasSize = "Y",
+        CanvasSize = UDim2.new(),
+        BackgroundTransparency = 1,
+        ScrollBarThickness = 2,
+        Visible = firstVisible
+    }) 
+    
+    Create("UIPadding", Container, {
+        PaddingLeft = UDim.new(0, 10),
+        PaddingRight = UDim.new(0, 10),
+        PaddingTop = UDim.new(0, 10),
+        PaddingBottom = UDim.new(0, 10)
+    }) 
+    
+    Create("UIListLayout", Container, {
+        Padding = UDim.new(0, 5)
     })
     
     if TabTitle then
-      Create("TextLabel",Container,{BackgroundTransparency=1,Text="#"..string.gsub(TabName," ","-"),TextSize=25,Font=Configs_HUB.Text_Font,TextXAlignment="Left",TextColor3=Configs_HUB.Cor_Text,Size=UDim2.new(1, 0, 0, 30),Position=UDim2.new(0, 30, 0, 0),Name="Frame"})
+        Create("TextLabel", Container, {
+            BackgroundTransparency = 1,
+            Text = "#" .. string.gsub(TabName, " ", "-"),
+            TextSize = 25,
+            Font = Configs_HUB.Text_Font,
+            TextXAlignment = "Left",
+            TextColor3 = Configs_HUB.Cor_Text,
+            Size = UDim2.new(1, 0, 0, 30),
+            Position = UDim2.new(0, 30, 0, 0),
+            Name = "Frame"
+        })
     end
     
     TextButton.MouseButton1Click:Connect(function()
-      for _,container in pairs(Containers:GetChildren()) do
-        if container:IsA("ScrollingFrame") then
-          container.Visible = false
+        for _, container in pairs(Containers:GetChildren()) do
+            if container:IsA("ScrollingFrame") then
+                container.Visible = false
+            end
         end
-      end
-      for _,frame in pairs(ScrollBar:GetChildren()) do
-        if frame:IsA("Frame") and frame:FindFirstChild("TextLabel") and frame.TextLabel ~= TextLabel then
-          CreateTween(frame.TextLabel, "TextColor3", Configs_HUB.Cor_DarkText, 0.3, false)
-          frame.TextLabel.TextSize = 14
+        
+        for _, frame in pairs(ScrollBar:GetChildren()) do
+            if frame:IsA("Frame") and frame:FindFirstChild("TextLabel") and frame.TextLabel ~= TextLabel then
+                CreateTween(frame.TextLabel, "TextColor3", Configs_HUB.Cor_DarkText, 0.3, false)
+                frame.TextLabel.TextSize = 14
+            end
         end
-      end
-      Container.Visible = true
-      CreateTween(TextLabel, "TextColor3", Configs_HUB.Cor_Text, 0.3, false)
-      TextLabel.TextSize = 15
+        
+        Container.Visible = true
+        CreateTween(TextLabel, "TextColor3", Configs_HUB.Cor_Text, 0.3, false)
+        TextLabel.TextSize = 15
     end)
     
     firstVisible = false
     FirstTab = false
     textsize = 14
     textcolor = Configs_HUB.Cor_DarkText
+    
     return Container
-  end
-  
+end
+
   function AddButton(parent, Configs)
     local ButtonName = Configs.Name or "Button!!"
     local Callback = Configs.Callback or function() end
@@ -699,7 +731,7 @@ function MakeWindow(Configs)
     })
     
     local ImageLabel = Create("ImageLabel", TextButton, {
-      Image = "rbxassetid://114154205126818",
+      Image = "rbxassetid://99956220697276",
       Size = UDim2.new(0, 20, 0, 20),
       Position = UDim2.new(0, 5, 0, 2.5),
       BackgroundTransparency = 1,
@@ -1128,7 +1160,7 @@ function MakeWindow(Configs)
       Size = UDim2.new(1, -100, 1, tonumber(-TextButton.Size.Y.Offset - 20)),
       Position = UDim2.new(0, 10, 0, tonumber(TextButton.Size.Y.Offset + 12.5)),
       Visible = false,
-      Image = "rbxassetid://98008375644294"
+      Image = "rbxassetid://4155801252"
     })Corner(UI_Grade)Stroke(UI_Grade)local SavePos = Create("Frame", UI_Grade, {Visible = false})
     
     local grade = Create("TextButton", TextButton, {
@@ -1274,7 +1306,7 @@ function MakeWindow(Configs)
     })
     
     local Arrow = Create("ImageLabel", TextButton, {
-      Image = "rbxassetid://114154205126818",
+      Image = "rbxassetid://6031090990",
       Size = UDim2.new(0, 25, 0, 25),
       Position = UDim2.new(0, 5, 0, 0),
       BackgroundTransparency = 1
@@ -1603,7 +1635,7 @@ function MakeWindow(Configs)
       Size = UDim2.new(1, -24, 0, 25),
       AnchorPoint = Vector2.new(0.5, 1),
       Position = UDim2.new(0.5, 0, 1, -8),
-      Text = "دخول",
+      Text = "Join",
       Font = Enum.Font.GothamBold,
       TextSize = 15,
       TextColor3 = Color3.fromRGB(220, 220, 220),
