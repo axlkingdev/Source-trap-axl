@@ -57,8 +57,7 @@ Darker={
 Colors={
 Background=ColorSequence.new{
 ColorSequenceKeypoint.new(0.00,Color3.fromRGB(25,25,25)),
-ColorSequenceKeypoint.new(0.50,Color3.fromRGB(32.5,32.5,32.5)),
-ColorSequenceKeypoint.new(1.00,Color3.fromRGB(25,25,25))
+ColorSequenceKeypoint.new(0.50,Color3.fromRGB(32.5,32.5,32.5)),ColorSequenceKeypointt.new(1.00,Color3.fromRGB(25,25,25))
 },
 Primary=Color3.fromRGB(88,101,242),
 OnPrimary=Color3.fromRGB(61,67,135),
@@ -114,7 +113,7 @@ Bold=Enum.Font.BuilderSansBold,
 ExtraBold=Enum.Font.BuilderSansExtraBold,
 SliderValue=Enum.Font.FredokaOne
 },
-BackgroundTransparency=0.03
+BackgroundTransparency=0.06
 }
 }
 
@@ -130,8 +129,8 @@ GitHubOwner="tlredz"
 },
 Default={
 Theme="Darker",
-UISize=UDim2.fromOffset(550,380),
-TabSize=160
+UISize=UDim2.fromOffset(420,380),
+TabSize=190
 },
 
 Themes=r,
